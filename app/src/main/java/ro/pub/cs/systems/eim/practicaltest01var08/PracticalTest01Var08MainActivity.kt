@@ -3,6 +3,7 @@ package ro.pub.cs.systems.eim.practicaltest01var08
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -12,6 +13,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
+    var victory = 0
+    var fail = 0
     lateinit var play : Button
     lateinit var riddle: EditText
     lateinit var answer: EditText
@@ -42,7 +45,29 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
         super.onActivityResult(requestCode, resultCode, intent)
         if (resultCode == RESULT_OK) {
-            Toast.makeText(this, "OK", Toast.LENGTH_LONG)
+            Toast.makeText(this, "The activity returned with result VICTORY", Toast.LENGTH_LONG).show()
+            victory++
+        } else {
+            Toast.makeText(this, "The activity returned with result FAIL", Toast.LENGTH_LONG).show()
+            fail++
+        }
+
+        Log.d("AplicatiaMea", "Scor : $victory victorii si $fail failuri")
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt("VICTORY", victory)
+        outState.putInt("FAIL", fail)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        if (savedInstanceState.containsKey("VICTORY")) {
+            victory = savedInstanceState.getInt("VICTORY")
+        }
+        if (savedInstanceState.containsKey("FAIL")) {
+            fail = savedInstanceState.getInt("FAIL")
         }
     }
 }

@@ -38,18 +38,19 @@ class PracticalTest01Var08PlayActivity : AppCompatActivity() {
         check.setOnClickListener {
             val answerParent = parentIntent.getStringExtra("answer")
             if (answerParent.equals(answer.text.toString())) {
-                //setResult(RESULT_OK, Intent())
+                setResult(RESULT_OK, Intent())
                 Toast.makeText(this, "VICTORY", Toast.LENGTH_LONG).show()
             } else {
-                //setResult(RESULT_CANCELED, Intent())
+                setResult(RESULT_CANCELED, Intent())
                 Toast.makeText(this, "FAIL", Toast.LENGTH_LONG).show()
             }
-            //finish()
+            finish()
         }
 
-       /* back.setOnClickListener {
+        back.setOnClickListener {
             setResult(RESULT_CANCELED, Intent())
             finish()
-        }*/
+        }
     }
+
 }
